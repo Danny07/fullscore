@@ -1,0 +1,11 @@
+com\co\dannykrd\fullscore\utils\config\AppConfig.class
+com\co\dannykrd\fullscore\utils\objects\EntityResponse.class
+com\co\dannykrd\fullscore\utils\objects\Request.class
+com\co\dannykrd\fullscore\utils\objects\ServiceResponse.class
+com\co\dannykrd\fullscore\utils\objects\Tupla.class
+com\co\dannykrd\fullscore\utils\App.class
+com\co\dannykrd\fullscore\utils\Constants.class
+com\co\dannykrd\fullscore\utils\exception\FullScoreException.class
+com\co\dannykrd\fullscore\utils\utils\Convert.class
+com\co\dannykrd\fullscore\utils\config\AppConfig$1.class
+com\co\dannykrd\fullscore\utils\objects\Triple.class
