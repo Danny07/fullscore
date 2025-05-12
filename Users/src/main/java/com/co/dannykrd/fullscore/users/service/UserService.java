@@ -8,6 +8,7 @@ import java.util.Objects;
 import org.mapstruct.factory.Mappers;
 import org.springframework.context.MessageSource;
 import org.springframework.http.RequestEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.co.dannykrd.fullscore.users.dto.ProfileDto;
@@ -19,10 +20,12 @@ import com.co.dannykrd.fullscore.users.repository.UserRepository;
 import com.co.dannykrd.fullscore.utils.exception.FullScoreException;
 import com.co.dannykrd.fullscore.utils.utils.Utils;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserService {
 	
 	private final UserRepository repository;
@@ -31,13 +34,9 @@ public class UserService {
 	
 	private final MessageSource messageSource;
 	
-	private UserMapper mapper = Mappers.getMapper(UserMapper.class);
+	private final PasswordEncoder passwordEncoder;
 	
-	public UserService (UserRepository repository, ProfileService profileService, MessageSource messageSource) {
-		this.repository = repository;
-		this.profileService = profileService;
-		this.messageSource =  messageSource;
-	}
+	private UserMapper mapper = Mappers.getMapper(UserMapper.class);
 
 	public String createUser(RequestEntity<UserCreateRqDto> entityRequest) throws FullScoreException{
 		try {
@@ -55,6 +54,7 @@ public class UserService {
 			if(!validations.isEmpty()) {
 				throw new FullScoreException(validations);
 			}
+			userCreateRqDto.setPassword(passwordEncoder.encode(userCreateRqDto.getPassword()));
 			ProfileDto profileDto = profileService.findProfileById(userCreateRqDto.getProfile()); 
 			User userCreate = mapper.userCreateRqDtoToUser(userCreateRqDto, profileDto);
 			repository.save(userCreate);
