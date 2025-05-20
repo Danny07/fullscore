@@ -25,3 +25,12 @@ replay_pid*
 /.metadata
 /futbol
 /Providers
+*/target
+createProject.bat
+
+# Maven wrapper (mantener solo lo necesario)
+.mvn/*
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+!mvnw
+!mvnw.cmd
